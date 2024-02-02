@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<br><br><br>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="text-align: center;">
+                {% for post in posts %}
+                <form method="POST" action="{% url 'delete' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="post_id" value="{{ post.id }}">
+                    {{ post }} &nbsp&nbsp <button type="submit" class="btn btn-danger btn-sm">Usuń</button><hr><br><br>
+                </form>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

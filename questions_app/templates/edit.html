@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+    <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<br><br>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+        <div class="card bg-light mb-3" style="max-width: 25rem;">
+      <div class="card-header text-center">Nazwa testu</div>
+      <div class="card-body">
+        <p class="card-text">
+            {% for t in name %}
+        <h3 class="text-center">{{ t }}</h3>
+     {% endfor %}
+        </p>
+      </div>
+    </div>
+
+<br><br>
+
+      <form method="post">
+        {% csrf_token %}
+        <h6>Dodaj temat:</h6>
+        {{ form.question }}<br><br>
+        <h6>Dodaj Odpowiedź:</h6>
+        {{ form.answear }}<br><br>
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+    </form>
+
+    </div>
+
+    <div class="col">
+         {% for question in questions %}
+       <p><strong>{{ question.question }}</strong><br>
+          {{ question.answear|safe }}</p>
+       <form method="post">
+           {% csrf_token %}
+           <input type="hidden" name="delete_question" value="{{ question.id }}">
+           <button type="submit" class="btn btn-danger btn-sm">Usuń</button>
+       </form>
+        <br>
+       <hr>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

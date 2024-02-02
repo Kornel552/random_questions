@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br><br><br>
+<div class="container">
+    {% if question %}
+    <a href="{% url 'random_question' topic_id=question.key.id %}" class="btn btn-primary">Losuj inne pytanie</a>
+    <br><br><br><br>
+        <h2>{{ question.question }}</h2>
+        <!-- Możesz tu dodać więcej szczegółów pytania -->
+
+
+        <br><br><br><br>
+    <button id="show-answer" class="btn btn-info">Pokaż odpowiedź</button>
+    <br><br><br><br>
+        <!-- Sekcja odpowiedzi, domyślnie ukryta -->
+        <div id="answer" style="display:none;">
+            <p>{{ question.answear|safe }}</p>
+        </div>
+
+    {% else %}
+        <p>{{ message }}</p>
+    {% endif %}
+</div>
+
+<script>
+    document.getElementById('show-answer').addEventListener('click', function() {
+        var answer = document.getElementById('answer');
+        if (answer.style.display === "none") {
+            answer.style.display = "block";
+        } else {
+            answer.style.display = "none";
+        }
+    });
+</script>
+
+{% endblock %}

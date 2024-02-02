@@ -1,0 +1,116 @@
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+    .background {
+<!--    background: #ebf0f6;-->
+<!--    background-image: linear-gradient(45deg, rgba(255,255,255,.05) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.05) 50%, rgba(255,255,255,.05) 75%, transparent 75%, transparent);-->
+<!--    background-size: 60px 60px;-->
+}
+
+  .body {
+background: rgb(191,188,190);
+background: linear-gradient(180deg, rgba(191,188,190,1) 38%, rgba(167,203,177,1) 100%);
+
+}
+
+ .body-sm {
+ background: #bfbcbe;
+
+ }
+
+  .bod {
+background: rgb(191,188,190);
+background: linear-gradient(180deg, rgba(191,188,190,1) 38%, rgba(167,203,177,1) 100%);
+}
+
+/* Styl dla dużych ekranów */
+ @media (min-width: 700px) {
+   /* Zaokrąglone rogi dla paska po prawej górze i dole */
+   .navbar-collaps {
+     border-radius: 0 3rem 3rem 0;
+   }
+ }
+
+ /* Styl dla małych ekranów */
+ @media (max-width: 767.98px) {
+   /* Zaokrąglone rogi dolnej lewej i prawej strony */
+   .navbar-collapse {
+     border-radius: 0 0 2rem 2rem;
+   }
+ }
+
+ /* Dodatkowe style dla rozwijanego menu */
+.collapse.navbar-collapse {
+    max-height: 45vh; /* Maksymalna wysokość to 50% wysokości widoku */
+    overflow-y: auto; /* Umożliwia przewijanie, jeśli zawartość przekracza maksymalną wysokość */
+}
+
+/* Poprawki dla ikony rozwijania menu */
+.navbar-toggler-icon {
+    background-image: url('data:image/svg+xml;charset=UTF8,<svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><path stroke="rgba(255, 255, 255, 0.5)" stroke-width="2" stroke-linecap="round" d="M4 7h22M4 15h22M4 23h22"/></svg>');
+    </style>
+
+</head>
+<body class="background">
+    <div class="container-fluid h-100">
+        <div class="row h-100 ">
+            <!-- pasek po lewej stronie -->
+            <div class="col-md-2 p-2 d-none d-md-block body navbar-collaps">
+               <div style="padding: 30px; padding-right: 15px;">
+                   <h1 class="text-white"><a class="nav-link" href="/">Test app</a></h1>
+                   <hr>
+                 <br>
+                <h4><a class="nav-link" href="/">Home</a></h4>
+                   <br>
+                   {% for t in topics %}
+                   <h5><a class="nav-link text-white" href="{% url 'topic' topic_id=t.id %}">{{ t }}</a></h5><br>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-grid-fill" viewBox="0 0 16 16">
+  <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5z"/>
+</svg><br><br>
+                   {% endfor %}
+            </div>
+            </div>
+            <!-- Rozwijane menu na małych ekranach -->
+            <div class="col-12 d-md-none">
+    <nav class="navbar navbar-expand-lg fixed-top collapse.navbar-collapse">
+        <div class="navbar fixed-top body-sm ">
+        <a class="navbar-brand text-white" href="/">Test app</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+            </div>
+        <div class="collapse navbar-collapse bod" id="navbarNav">
+            <ul class="navbar-nav text-center">
+                <li class="nav-item">
+                    <br><br>
+                    <h5><a class="nav-link" href="/">Home</a></h5>
+                  <hr>
+                </li>
+                <!-- Tutaj możesz dodać więcej elementów menu -->
+                 {% for t in topics %}
+        <li class="nav-item">
+            <h6><a class="nav-link text-white" href="{% url 'topic' topic_id=t.id %}">{{ t }}</a></h6>
+ <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-grid-fill" viewBox="0 0 16 16">
+  <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5z"/>
+</svg>
+        </li>
+
+        {% endfor %}
+            </ul>
+        </div>
+    </nav>
+</div>
+
+            <!-- Główna zawartość -->
+            <div class="col-md-10 p-3">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

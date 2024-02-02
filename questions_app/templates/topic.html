@@ -1,0 +1,32 @@
+   {% extends 'base.html' %}
+
+   {% block content %}
+     <br><br>
+     <div class="container">
+         <div class="d-flex justify-content-between align-items-center">
+         <a class="btn btn-outline-primary btn-sm" href="{% url 'random_question' topic_id=topic.id %}">Losowe pytanie z tematu</a>
+<a class="text-right" href="{% url 'edit' topic.id %}">edytuj</a>
+         </div>
+       <div class="card bg-light mb-3" style="max-width: 100rem;">
+      <div class="card-header text-center">Nazwa testu</div>
+      <div class="card-body">
+        <p class="card-text">
+        <h3 class="text-center">{{ topic }}</h3>
+        </p>
+      </div>
+    </div>
+
+       <br>
+
+       {% for question in questions %}
+         <div class="card">
+<div class="card-body">
+         <h4>{{ question.question }}</h4>
+      </div>
+</div>
+         <p>{{ question.answear|safe }}</p>
+         <br><br><br>
+       {% endfor %}
+     </div>
+
+{% endblock %}
