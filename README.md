@@ -1,3 +1,2 @@
 # random_questions
-
-długość zdjęcia ok 120px
+App for create question sets which can be randomize pick for learn!
