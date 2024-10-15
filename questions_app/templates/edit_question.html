@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<head>
+    {{ form.media }}
+</head>
+<br><br><br>
+<h2>Edytuj pytanie</h2>
+<form method="post" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" type="submit">Zapisz</button>
+</form>
+{% endblock %}

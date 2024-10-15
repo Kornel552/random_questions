@@ -2,6 +2,9 @@
 
 {% block content %}
 <br><br><br>
+
+{% if topic.change == True %}
+
 <div class="container">
     {% if question %}
     <a href="{% url 'random_question' topic_id=question.key.id %}" class="btn btn-primary">Losuj inne pytanie</a>
@@ -22,10 +25,46 @@
         <p>{{ message }}</p>
     {% endif %}
 </div>
+{% endif %}
+
+{% if topic.change == False %}
+
+<div class="container">
+    {% if question %}
+    <a href="{% url 'random_question' topic_id=question.key.id %}" class="btn btn-primary">Losuj inne pytanie</a>
+    <br><br><br><br>
+        <h2>{{ question.answear|safe }}</h2>
+        <!-- Możesz tu dodać więcej szczegółów pytania -->
+
+
+        <br><br><br><br>
+    <button id="show-answer1" class="btn btn-info">Pokaż odpowiedź</button>
+    <br><br><br><br>
+        <!-- Sekcja odpowiedzi, domyślnie ukryta -->
+        <div id="answer1" style="display:none;">
+            <p>{{ question.question }}</p>
+        </div>
+
+    {% else %}
+        <p>{{ message }}</p>
+    {% endif %}
+</div>
+{% endif %}
+
 
 <script>
     document.getElementById('show-answer').addEventListener('click', function() {
         var answer = document.getElementById('answer');
+        if (answer.style.display === "none") {
+            answer.style.display = "block";
+        } else {
+            answer.style.display = "none";
+        }
+    });
+</script>
+<script>
+    document.getElementById('show-answer1').addEventListener('click', function() {
+        var answer = document.getElementById('answer1');
         if (answer.style.display === "none") {
             answer.style.display = "block";
         } else {

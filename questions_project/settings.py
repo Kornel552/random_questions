@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-5&1lfo)@)0=3!tc5o^1m4$9o6nhl$s3t)628*fmw!7_vtt*iit
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [#'questionsapp12.pythonanywhere.com',
+                ]
 
 
 # Application definition
@@ -38,23 +39,39 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'questions_app',
-    'ckeditor',
+    'django_ckeditor_5',
 ]
 
-CKEDITOR_CONFIGS = {
-         'default': {
-             'toolbar': 'Custom',
-             'toolbar_Custom': [
-                 ['SpellChecker', 'Undo', 'Redo'],
-                 ['TextColor', 'BGColor'],
-                 ['Bold', 'Italic', 'Underline'],
-                 ['NumberedList', 'BulletedList'], # Dodanie opcji listowania
-                 ['Link', 'Unlink'],
-                 ['Smiley', 'SpecialChar'],
-                 ['Indent', 'Outdent'],
-             ]
-         }
-     }
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': [
+            'undo', 'redo',
+            '|',
+            'heading',
+            '|',
+            'bold', 'italic', 'underline',
+            '|',
+            'link', 'imageUpload',
+            '|',
+            'bulletedList', 'numberedList', 'outdent', 'indent',
+            '|',
+            'blockQuote', 'insertTable',
+            '|',
+            'specialCharacters',
+        ],
+        'image': {
+            'toolbar': [
+                'imageTextAlternative', 'imageStyle:full', 'imageStyle:side'
+            ],
+            'styles': [
+                'full',
+                'side'
+            ]
+        },
+        'height': '500px',
+        'width': 'auto',
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -133,9 +150,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

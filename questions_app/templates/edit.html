@@ -1,28 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
-    {% load static %}
-    <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
-    <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
-<br><br>
+{% load static %}
 
+<br><br>
+<head>
+    {{ form.media }}
+</head>
 <div class="container">
   <div class="row">
     <div class="col">
 
-        <div class="card bg-light mb-3" style="max-width: 25rem;">
+    <div class="card bg-light mb-3" style="max-width: 25rem;">
       <div class="card-header text-center">Nazwa testu</div>
       <div class="card-body">
         <p class="card-text">
-            {% for t in name %}
-        <h3 class="text-center">{{ t }}</h3>
-     {% endfor %}
+
+        <h5 class="text-center">
+          <form method="post">
+          {% csrf_token %}
+          {{ changeform.topic }}<br><br>
+          zamień miejscami wyświetlanie pytań z odpowiedziami<br>
+          {{ changeform.change }}<br><br>
+          <button class="btn btn-sm btn-primary" type="submit">zapisz</button>
+      </form>
+      </h5>
+
         </p>
       </div>
     </div>
 
 <br><br>
 
-      <form method="post">
+      <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <h6>Dodaj temat:</h6>
         {{ form.question }}<br><br>
@@ -40,6 +49,7 @@
        <form method="post">
            {% csrf_token %}
            <input type="hidden" name="delete_question" value="{{ question.id }}">
+           <a href="{% url 'edit_question' topic_id=question.key.id question_id=question.id %}" class="btn btn-sm btn-secondary">Edytuj</a>
            <button type="submit" class="btn btn-danger btn-sm">Usuń</button>
        </form>
         <br>
